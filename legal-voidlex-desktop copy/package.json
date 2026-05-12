@@ -1,0 +1,106 @@
+{
+  "name": "legal-voidlex-desktop",
+  "version": "1.0.0",
+  "description": "VOIDLEX Local AI Legal Intelligence Engine",
+  "author": {
+    "name": "Imperial Eminence Cyberguard Corporation",
+    "email": "support@voidlex.com"
+  },
+  "homepage": "https://voidlex.com",
+  "license": "UNLICENSED",
+  "main": "src/main/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "electron .",
+    "app:dev": "node scripts/dev.js",
+    "dist": "npm run build && electron-builder",
+    "dist:mac": "npm run build && electron-builder --mac --arm64",
+    "dist:mac:arm64": "npm run build && electron-builder --mac --arm64",
+    "dist:mac:intel": "npm run build && electron-builder --mac --x64",
+    "dist:linux": "npm run build && electron-builder --linux --x64"
+  },
+  "dependencies": {
+    "lucide-react": "^0.344.0",
+    "pdfkit": "^0.15.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "electron": "^29.1.0",
+    "electron-builder": "^24.13.3",
+    "vite": "^5.1.4"
+  },
+  "build": {
+    "appId": "com.iecc.voidlex",
+    "productName": "VOIDLEX Local AI Legal Intelligence Engine",
+    "directories": {
+      "output": "dist"
+    },
+    "asar": true,
+    "asarUnpack": [
+      "backend"
+    ],
+    "afterPack": "./scripts/afterPack.js",
+    "mac": {
+      "target": {
+        "target": "dmg",
+        "arch": [
+          "arm64"
+        ]
+      },
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.icns",
+      "identity": null
+    },
+    "dmg": {
+      "background": "assets/dmg-background.png",
+      "iconSize": 120,
+      "window": {
+        "width": 640,
+        "height": 480
+      },
+      "contents": [
+        {
+          "x": 480,
+          "y": 240,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 160,
+          "y": 240,
+          "type": "file"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "appx"
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Office",
+      "icon": "assets/icon.png",
+      "maintainer": "Imperial Eminence Cyberguard Corporation <support@voidlex.com>"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "appx": {
+      "identityName": "TCShaksham.VOIDLEX",
+      "publisher": "CN=535CF7E1-6BBC-46FB-B67E-2547A5424A56",
+      "publisherDisplayName": "IMPERIAL EMINENCE CYBERGUARD CORPORATION",
+      "displayName": "VOIDLEX"
+    }
+  }
+}
